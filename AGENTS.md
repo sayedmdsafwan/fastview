@@ -26,7 +26,7 @@
   - `src/ui.rs` layout and all chrome/overlays
   - `src/gfx.rs` software canvas primitives + GDI text
   - `src/library.rs` folder scan + natural sort
-- Build: `cargo build --release --manifest-path "E:\Rust Projects\fastview\Cargo.toml"`
+- Build: `cargo build --release`
 - Installer: `FastView.iss` -> `installer\FastView_Setup.exe` with Inno Setup 6
 - Release profile: opt-level 3, thin LTO, 1 CGU, panic=abort, strip, static CRT.
 

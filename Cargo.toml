@@ -1,6 +1,6 @@
 [package]
 name = "fastview"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2024"
 description = "A tiny, instant photo viewer for Windows: fast opening, smooth zoom, crop and rotate"
 license = "MIT"

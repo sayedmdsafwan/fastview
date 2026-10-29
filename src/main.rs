@@ -16,6 +16,7 @@
 // Shortcuts are listed in the in-app help (F1).
 
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![allow(dead_code, unused_imports, unused_variables, unused_mut, unused_assignments)]
 
 mod gfx;
 mod imaging;
@@ -191,6 +192,10 @@ struct App {
 }
 
 fn main() {
+    if std::env::args().any(|a| a == "--set-default") {
+        platform::open_default_apps();
+        return;
+    }
     timing::start();
     platform::init_process();
     unsafe {
@@ -1230,6 +1235,10 @@ impl App {
 
         if ctrl && (vk == b'O' as u16) {
             self.open_dialog();
+            return;
+        }
+        if ctrl && (vk == b'D' as u16) {
+            platform::open_default_apps();
             return;
         }
         if ctrl && (vk == b'C' as u16) {

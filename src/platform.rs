@@ -33,7 +33,7 @@ use windows::Win32::UI::Shell::{
     FileOpenDialog, IFileOpenDialog, FO_DELETE, FOF_ALLOWUNDO, FOF_NOCONFIRMATION,
     FOF_NOERRORUI, FOF_SILENT, FOS_FILEMUSTEXIST, FOS_FORCEFILESYSTEM, FOS_PICKFOLDERS,
     SHChangeNotify, SHFileOperationW, SHFILEOPSTRUCTW, SHCNE_ASSOCCHANGED, SHCNF_IDLIST,
-    SIGDN_FILESYSPATH,
+    ShellExecuteW, SIGDN_FILESYSPATH,
 };
 use windows::Win32::UI::WindowsAndMessaging::*;
 use winreg::enums::HKEY_CURRENT_USER;
@@ -329,6 +329,30 @@ pub fn register_open_with() {
     let _ = install_open_with();
 }
 
+/// Bump this when the registered file types change so existing installs
+/// re-register once on their next launch.
+#[cfg(not(debug_assertions))]
+const REG_REV: &str = "2";
+
+/// One-click "make FastView the default photo viewer": registers every
+/// supported type, then opens FastView's own page in Settings > Default apps
+/// where a single click on "Set default" covers all picture types.
+/// (Windows does not allow apps to set the default silently.)
+pub fn open_default_apps() {
+    #[cfg(not(debug_assertions))]
+    let _ = install_open_with();
+    unsafe {
+        let _ = ShellExecuteW(
+            None,
+            w!("open"),
+            w!("ms-settings:defaultapps?registeredAppUser=FastView"),
+            PCWSTR::null(),
+            PCWSTR::null(),
+            SW_SHOWNORMAL,
+        );
+    }
+}
+
 #[cfg(not(debug_assertions))]
 fn install_open_with() -> std::io::Result<()> {
     let exe_path = std::env::current_exe()?;
@@ -338,7 +362,8 @@ fn install_open_with() -> std::io::Result<()> {
     // Do not touch the shell on every single launch.
     let marker = hkcu.create_subkey("Software\\FastView")?.0;
     let previous: String = marker.get_value("OpenWithExe").unwrap_or_default();
-    if previous.eq_ignore_ascii_case(&exe) {
+    let prev_rev: String = marker.get_value("RegRev").unwrap_or_default();
+    if previous.eq_ignore_ascii_case(&exe) && prev_rev == REG_REV {
         return Ok(());
     }
 
@@ -393,6 +418,7 @@ fn install_open_with() -> std::io::Result<()> {
     }
 
     marker.set_value("OpenWithExe", &exe)?;
+    marker.set_value("RegRev", &REG_REV)?;
     unsafe {
         SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, None, None);
     }

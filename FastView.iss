@@ -1,8 +1,8 @@
 [Setup]
 AppId={{0ACC1580-1FCC-4B48-8590-C2FE5DCA1C06}
 AppName=FastView
-AppVersion=1.0.0
-AppVerName=FastView 1.0.0
+AppVersion=1.1.0
+AppVerName=FastView 1.1.0
 AppPublisher=Md. Safwan
 AppPublisherURL=https://github.com/sayedmdsafwan/fastview
 AppSupportURL=https://github.com/sayedmdsafwan/fastview/issues
@@ -82,6 +82,13 @@ Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; V
 Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".bmp"; ValueData: "FastView.Image"
 Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".tif"; ValueData: "FastView.Image"
 Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".tiff"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".jpe"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".jfif"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".ico"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".heic"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".heif"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".avif"; ValueData: "FastView.Image"
+Root: HKCU; Subkey: "Software\Classes\FastView\Capabilities\FileAssociations"; ValueType: string; ValueName: ".jxl"; ValueData: "FastView.Image"
 Root: HKCU; Subkey: "Software\RegisteredApplications"; ValueType: string; ValueName: "FastView"; ValueData: "Software\Classes\FastView\Capabilities"; Flags: uninsdeletevalue
 
 ; One OpenWithProgids value per extension.
@@ -105,4 +112,5 @@ Root: HKCU; Subkey: "Software\Classes\.jxl\OpenWithProgids"; ValueType: string; 
 Root: HKCU; Subkey: "Software\FastView"; ValueType: string; ValueName: "OpenWithExe"; ValueData: "{app}\fastview.exe"; Flags: uninsdeletekey
 
 [Run]
+Filename: "{app}\fastview.exe"; Parameters: "--set-default"; Description: "Set FastView as default photo viewer (opens Windows Settings)"; Flags: nowait postinstall skipifsilent
 Filename: "{app}\fastview.exe"; Description: "Launch FastView"; Flags: nowait postinstall skipifsilent

@@ -90,7 +90,7 @@ uninstaller.
 Requirements: Rust stable (MSVC toolchain) and Inno Setup 6 for the installer.
 
 ```bat
-cargo build --release --manifest-path "E:\Rust Projects\fastview\Cargo.toml"
+cargo build --release
 ```
 
 The executable is `target\release\fastview.exe`. It statically links the C runtime
