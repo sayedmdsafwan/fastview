@@ -1,8 +1,8 @@
 [Setup]
 AppId={{0ACC1580-1FCC-4B48-8590-C2FE5DCA1C06}
 AppName=FastView
-AppVersion=1.1.0
-AppVerName=FastView 1.1.0
+AppVersion=1.2.0
+AppVerName=FastView 1.2.0
 AppPublisher=Md. Safwan
 AppPublisherURL=https://github.com/sayedmdsafwan/fastview
 AppSupportURL=https://github.com/sayedmdsafwan/fastview/issues

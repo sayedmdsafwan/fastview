@@ -4,7 +4,7 @@ A tiny, instant photo viewer for Windows, written in Rust.
 
 ![FastView](screenshot.png)
 
-**Download:** [FastView 1.0.0 setup](https://github.com/sayedmdsafwan/fastview/releases/latest) | MIT licensed | no admin rights needed.
+**Download:** [FastView Setup (latest release)](https://github.com/sayedmdsafwan/fastview/releases/latest) | MIT licensed | no admin rights needed.
 
 Windows Photos takes a second or more to open, refreshes a lot of UI, and is heavy
 on weak laptops. FastView is built the opposite way: one native window, no GPU
